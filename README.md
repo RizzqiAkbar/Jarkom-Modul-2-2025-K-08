@@ -12,7 +12,7 @@ Anggota :
 ## Soal 1
 ### Configure
 #### -Eonwe
-`auto eth0
+```auto eth0
 iface eth0 inet dhcp
 
 auto eth1
@@ -30,17 +30,16 @@ iface eth3 inet static
 	address 192.215.3.1
 	netmask 255.255.255.0
 
-
-iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE -s 192.215.0.0/16`
+iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE -s 192.215.0.0/16```
 
 #### - Earendil
-`auto eth0
+```auto eth0
 iface  eth0 inet static
   address 192.215.1.2
   netmask 255.255.255.0
   gateway 192.215.1.1
 
-up echo nameserver 192.168.122.1 >>  /etc/resolv.conf`
+up echo nameserver 192.168.122.1 >>  /etc/resolv.conf```
 
 
 ## Soal 2
