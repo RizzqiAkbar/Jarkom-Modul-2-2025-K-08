@@ -11,7 +11,9 @@ Anggota :
 
 ## Soal 1
 ### Configure
-#### -Eonwe
+## Soal 1 - Soal 2 - Soal 3
+### Configure
+#### Eonwe
 ```
 auto eth0
 iface eth0 inet dhcp
@@ -30,11 +32,9 @@ auto eth3
 iface eth3 inet static
 	address 192.215.3.1
 	netmask 255.255.255.0
-
 iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE -s 192.215.0.0/16
 ```
-
-#### - Earendil
+#### Earendil
 ```
 auto eth0
 iface  eth0 inet static
@@ -45,14 +45,147 @@ iface  eth0 inet static
 up echo nameserver 192.168.122.1 >>  /etc/resolv.conf
 ```
 
+#### Elwing
+```
+auto eth0
+iface  eth0 inet static
+  address 192.215.1.3
+  netmask 255.255.255.0
+  gateway 192.215.1.1
 
-## Soal 2
+up echo nameserver 192.168.122.1 >>  /etc/resolv.conf
+```
 
-## Soal 3
+#### Cildan
+```
+auto eth0
+iface eth0 inet static
+	address 192.215.2.2
+	netmask 255.255.255.0
+	gateway 192.215.2.1
+
+up echo nameserver 192.168.122.1 > /etc/resolv.conf
+```
+
+#### Elrond
+```
+auto eth0
+iface eth0 inet static
+	address 192.215.2.3
+	netmask 255.255.255.0
+	gateway 192.215.2.1
+
+up echo nameserver 192.168.122.1 > /etc/resolv.conf
+```
+
+#### Maglor
+```
+auto eth0
+iface eth0 inet static
+	address 192.215.2.4
+	netmask 255.255.255.0
+	gateway 192.215.2.1
+
+up echo nameserver 192.168.122.1 > /etc/resolv.conf
+```
+
+#### Sirion
+```
+auto eth0
+iface eth0 inet static
+	address 192.215.3.6
+	netmask 255.255.255.0
+	gateway 192.215.3.1
+
+up echo nameserver 192.168.122.1 > /etc/resolv.conf
+```
+
+#### Tirion
+```
+auto eth0
+iface eth0 inet static
+	address 192.215.3.2
+	netmask 255.255.255.0
+	gateway 192.215.3.1
+
+up echo nameserver 192.168.122.1 > /etc/resolv.conf
+```
+
+#### Valmar
+```
+auto eth0
+iface eth0 inet static
+	address 192.215.3.3
+	netmask 255.255.255.0
+	gateway 192.215.3.1
+
+up echo nameserver 192.168.122.1 > /etc/resolv.conf
+```
+
+#### Lindon
+```
+auto eth0
+iface eth0 inet static
+	address 192.215.3.4
+	netmask 255.255.255.0
+	gateway 192.215.3.1
+
+up echo nameserver 192.168.122.1 > /etc/resolv.conf
+```
+
+#### Vingilot
+```
+auto eth0
+iface eth0 inet static
+	address 192.215.3.5
+	netmask 255.255.255.0
+	gateway 192.215.3.1
+
+up echo nameserver 192.168.122.1 > /etc/resolv.conf
+```
+
 
 ## Soal 4
+Diminta membuat dua server DNS:
+- Tirion → ns1, bertindak sebagai master (authoritative utama)
+- Valmar → ns2, bertindak sebagai slave (cadangan)
+Nanti akan mengatur nama domain k08.com.com.
 
 ## Soal 5
+Pada percobaan ini dilakukan konfigurasi DNS Server dengan model master–slave menggunakan Bind9 pada dua node:
+- Tirion (ns1) bertindak sebagai DNS Master (authoritative utama) untuk domain `k08.com.`
+- Valmar (ns2) bertindak sebagai DNS Slave, yang akan melakukan sinkronisasi otomatis dari master menggunakan fitur zone transfer.
+
+1. Instalasi Paket
+- Menginstal `bind9`, `bind9utils`, dan `bind9-doc` untuk layanan DNS.
+
+2. Membuat Zona `k08.com`
+- Diset sebagai type master.
+- File zona disimpan di `/etc/bind/zones/db.k08.com`.
+- allow-transfer memberikan izin transfer ke Valmar `(192.215.3.3)`.
+- notify yes mengaktifkan pemberitahuan otomatis ke slave setiap ada perubahan.
+
+3. File Zona (db.k08.com)
+- Berisi record SOA, NS, dan A record untuk setiap host sesuai glosarium.
+- `@ IN A 192.215.3.6` menunjuk ke Sirion sebagai apex domain `(k08.com)`.
+
+4. Konfigurasi Forwarder
+- Domain eksternal diteruskan ke DNS upstream `192.168.122.1`.
+
+5. Validasi & Restart
+- Diperiksa dengan named-checkconf dan named-checkzone untuk memastikan tidak ada kesalahan sintaks.
+- Service Bind9 direstart agar konfigurasi aktif.
+
+Script: VALMAR.sh
+1. Konfigurasi Zona Slave
+- type slave menandakan Valmar hanya menerima data dari master `(192.215.3.2)`.
+- File hasil transfer otomatis disimpan di `/var/lib/bind/db.k08.com`.
+
+2. Forwarder & Query
+- Sama seperti master, mengizinkan query dari semua host dan meneruskan domain luar ke `192.168.122.1`.
+
+3. Sinkronisasi Otomatis
+- Saat service Bind9 diaktifkan, Valmar akan melakukan zone transfer otomatis dari Tirion.
 
 ## Soal 6
 
