@@ -57,11 +57,9 @@ echo "[OK] Reverse zone berhasil dibuat di Tirion (Master)"
 #!/bin/bash
 echo "[+] Konfigurasi Reverse Zone di Valmar (ns2)"
 
-# Pastikan BIND terinstal
 apt-get update -y >/dev/null 2>&1
 apt-get install -y bind9 bind9-utils bind9-dnsutils >/dev/null 2>&1
 
-# Tambahkan konfigurasi zona ke named.conf.local
 if ! grep -q "3.215.192.in-addr.arpa" /etc/bind/named.conf.local; then
 cat <<EOF >> /etc/bind/named.conf.local
 
