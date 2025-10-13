@@ -10,6 +10,38 @@ Anggota :
 <img width="1496" height="1347" alt="image" src="https://github.com/user-attachments/assets/5863c987-866c-4bcd-bbfd-c41e58ca640f" />
 
 ## Soal 1
+### Configure
+#### -Eonwe
+`auto eth0
+iface eth0 inet dhcp
+
+auto eth1
+iface eth1 inet static
+	address 192.215.1.1
+	netmask 255.255.255.0
+
+auto eth2
+iface eth2 inet static
+	address 192.215.2.1
+	netmask 255.255.255.0
+
+auto eth3
+iface eth3 inet static
+	address 192.215.3.1
+	netmask 255.255.255.0
+
+
+iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE -s 192.215.0.0/16`
+
+#### - Earendil
+`auto eth0
+iface  eth0 inet static
+  address 192.215.1.2
+  netmask 255.255.255.0
+  gateway 192.215.1.1
+
+up echo nameserver 192.168.122.1 >>  /etc/resolv.conf`
+
 
 ## Soal 2
 
