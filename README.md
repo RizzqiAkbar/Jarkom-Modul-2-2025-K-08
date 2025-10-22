@@ -231,6 +231,8 @@ Pengujian curl -I http://www.K08.com/static/ dan curl -I http://www.K08.com/app/
 
 ### Revisi
 Menggunakan lynx saat ingin mencoba apakah reverse proxy tersambung
+
+
 <img width="479" height="145" alt="Screenshot 2025-10-22 230518" src="https://github.com/user-attachments/assets/894d05ff-3eac-4504-a6f0-d84ecadc18a3" />
 <img width="502" height="159" alt="Screenshot 2025-10-22 230527" src="https://github.com/user-attachments/assets/ea96026b-02f0-4e77-bb5e-c8ae29370696" />
 
