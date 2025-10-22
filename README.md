@@ -229,6 +229,11 @@ Konfigurasi ini memanfaatkan satu node Sirion sebagai reverse proxy yang melakuk
 Pengujian curl -I http://www.K08.com/static/ dan curl -I http://www.K08.com/app/ harus mengembalikan status 200 OK. Permintaan konten tanpa header (misalnya curl http://www.K08.com/static/) menampilkan pesan “Halo dari Lindon…” atau “Halo dari Vingilot…” sesuai endpoint.
 <img width="571" height="98" alt="Screenshot 2025-10-12 145842" src="https://github.com/user-attachments/assets/41b1f099-e240-4c01-ac08-1b9729c3d46d" />
 
+### Revisi
+Menggunakan lynx saat ingin mencoba apakah reverse proxy tersambung
+<img width="479" height="145" alt="Screenshot 2025-10-22 230518" src="https://github.com/user-attachments/assets/894d05ff-3eac-4504-a6f0-d84ecadc18a3" />
+<img width="502" height="159" alt="Screenshot 2025-10-22 230527" src="https://github.com/user-attachments/assets/ea96026b-02f0-4e77-bb5e-c8ae29370696" />
+
 ## Soal 12
 Node Sirion di-update dan dilengkapi Nginx serta apache2-utils untuk mendukung path-based routing ke backend (/static/ dan /app/) sekaligus menambah endpoint /admin dengan simulasi Basic Auth.
 
@@ -554,3 +559,7 @@ curl -I http://www.k08.com/static
 - Gunakan nginx -t && nginx -s reload bila systemctl tak ada
 - Cek netstat -tuln | grep :80 untuk memastikan Nginx listen
 Dengan langkah ini, homepage grup K08 aktif di /, /app proxy ke Vingilot, dan /static proxy ke Lindon.
+
+### Revisi
+Menggunakan lynx 
+<img width="1478" height="762" alt="Screenshot 2025-10-22 230506" src="https://github.com/user-attachments/assets/62022a5f-725f-4dae-a069-8c5b2c1d5c0b" />
