@@ -143,6 +143,14 @@ iface eth0 inet static
 
 up echo nameserver 192.168.122.1 > /etc/resolv.conf
 ```
+### Dokumentasi Soal 2
+![WhatsApp Image 2025-10-20 at 19 16 21_7f6d1114](https://github.com/user-attachments/assets/4352fb14-7d64-43b7-88cf-ea879938a803)
+uji coba ping keluar client
+
+### Dokumentasi Soal 3
+![WhatsApp Image 2025-10-20 at 19 26 40_77b5e677](https://github.com/user-attachments/assets/267ab438-7d83-4e48-896b-8a0a1b165803)
+- uji coba ping ke Elrond lewat Earendil
+- uji coba ping 8.8.8.8 dan google.com
 
 
 ## Soal 4
@@ -150,6 +158,16 @@ Diminta membuat dua server DNS:
 - Tirion → ns1, bertindak sebagai master (authoritative utama)
 - Valmar → ns2, bertindak sebagai slave (cadangan)
 Nanti akan mengatur nama domain k08.com.com.
+### Output
+![WhatsApp Image 2025-10-20 at 19 13 30_99d21f7f](https://github.com/user-attachments/assets/b64ddc07-821f-4979-9ae7-e40ce5505ea3)
+- uji coba dari valmar menggunakan dig
+
+![WhatsApp Image 2025-10-20 at 19 19 06_25a02006](https://github.com/user-attachments/assets/7c37e959-443a-4c17-ba09-d85751a1046a)
+- uji coba dari valmar menggunakan ping
+
+![WhatsApp Image 2025-10-20 at 19 13 55_d6dd5cd5](https://github.com/user-attachments/assets/69ed8851-433b-4e97-bdcf-e4c0f7a3a968)
+- uji coba dari tirion menggunakan dig
+
 
 ## Soal 5
 Pada percobaan ini dilakukan konfigurasi DNS Server dengan model master–slave menggunakan Bind9 pada dua node:
