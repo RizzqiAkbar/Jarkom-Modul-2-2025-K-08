@@ -206,14 +206,49 @@ Script: VALMAR.sh
 - Saat service Bind9 diaktifkan, Valmar akan melakukan zone transfer otomatis dari Tirion.
 
 ## Soal 6
+memastikan zone transfer DNS antara ns1 (Tirion) dan ns2 (Valmar) sudah berjalan dengan benar.
+Artinya: setiap kali ada perubahan di zona k08.com (misalnya kamu ubah A record), maka Valmar (ns2) akan otomatis menerima salinannya dari Tirion (ns1).
+
+cara running : 
+cek apakah no serial nya sama
+- dari tirion : dig @192.215.3.2 k08.com SOA +short
+- dari valmar : dig @192.215.3.3 k08.com SOA +short 
+
+terus ping dan sesuaiin IP nya bener apa engga
+- ping tirion.k08.com -c 3
+- ping valmar.k08.com -c 3
+- ping earendil.k08.com -c 3
+
 
 ## Soal 7
+menambahkan DNS record baru (A dan CNAME) di zona domain <xxxx>.com, lalu cek dari dua klien berbeda bahwa semuanya bisa di-resolve (pakai ping atau dig).
+
+cara running :
+- di valmar : dig @192.215.3.3 k08.com AXFR
+
+uji coba di arendil
+di aerendil : echo "nameserver 192.215.3.2" > /etc/resolv.conf
+- ping -c 1 www.k08.com
+- ping -c 1 static.k08.com
+- ping -c 1 app.k08.com 
 
 ## Soal 8
+diminta membuat dan mengonfigurasi reverse DNS zone (PTR record) untuk jaringan tempat Sirion, Lindon, dan Vingilot berada — agar ketika dilakukan reverse lookup (pencarian dari IP ke nama host), hasilnya mengembalikan hostname yang benar.
 
-## Soal 9
+cara running :
+- dari aerendil :  dig -x 192.215.3.4
+
+## Soal 9 (REVISI)
+Menjalankan web server statis di Lindon yang bisa diakses lewat hostname static.<xxxx>.com, bukan lewat IP.
+
+- dari lindon : lynx http://static.k08.com/annals/ 
+![WhatsApp Image 2025-10-20 at 20 23 21_b84c9579](https://github.com/user-attachments/assets/f26aed87-5805-4ffe-9ac9-97f7150ac593)
+kalo di slide menggunakan arrow akan ke halaman sebelum" nya
+
 
 ## Soal 10
+cara running : 
+- lynx http://app.k08.com/ 
 
 ## Soal 11
 Konfigurasi ini memanfaatkan satu node Sirion sebagai reverse proxy yang melakukan path-based routing, serta dua node backend—Lindon untuk konten /static/ dan Vingilot untuk konten /app/. Setiap node menjalankan Nginx dengan konfigurasi minimal, sementara skrip bash otomatis menyiapkan file hosts, direktori konten, dan konfigurasi Nginx.
